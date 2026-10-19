@@ -85,7 +85,7 @@ namespace TestProject1
         }
 
         [TestMethod]
-        public void List_SeatchByName_Correct()
+        public void List_SearchByName_Correct()
         {
             _instrumentsList.Add(_defaultAcoustic);            
             _instrumentsList.Add(_defaultAcoustic);            
@@ -96,7 +96,7 @@ namespace TestProject1
             Assert.AreEqual(2, searchResult.Count);
         }
         [TestMethod]
-        public void List_SeatchByFamily_Correct()
+        public void List_SearchByFamily_Correct()
         {
             _instrumentsList.Add(_defaultAcoustic);            
             _instrumentsList.Add(_defaultElectric);
@@ -106,7 +106,7 @@ namespace TestProject1
             Assert.AreEqual(2, searchResult.Count);
         }
         [TestMethod]
-        public void List_SeatchByBrand_Correct()
+        public void List_SearchByBrand_Correct()
         {
             _instrumentsList.Add(_defaultAcoustic);            
             _instrumentsList.Add(_defaultAcoustic);            
@@ -117,7 +117,7 @@ namespace TestProject1
             Assert.AreEqual(3, searchResult.Count);
         }
         [TestMethod]
-        public void List_SeatchByIsElectric_Correct()
+        public void List_SearchByIsElectric_Correct()
         {
             _instrumentsList.Add(_defaultAcoustic);            
             _instrumentsList.Add(_defaultAcoustic);            
