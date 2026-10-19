@@ -1,6 +1,6 @@
-﻿using System.Collections.Specialized;
+﻿using System.Collections.Generic;
 
-namespace Lab_5
+namespace Lab_6
 {
     internal class Program
     {
@@ -256,6 +256,7 @@ namespace Lab_5
             int choice = Menu("\nChoose option to search: \n1-name \n2-family \n3-brand \n4-is electric \n0-back to main menu\n", 0, 4);
             int count = 0;
 
+            List<Instruments> searchResult = new List<Instruments>();
             switch (choice)
             {
                 case 1:
@@ -266,14 +267,7 @@ namespace Lab_5
 
                         if (!string.IsNullOrEmpty(searchName))
                         {
-                            for (int i = 0; i < list.Count; i++)
-                            {
-                                if (list[i].Name.ToLower().Contains(searchName))
-                                {
-                                    count++;
-                                    PrintRow(i + 1, list[i]);
-                                }
-                            }
+                            searchResult = list.FindAll(x => x.Name.ToLower().Contains(searchName));
                         }
                         break;
                     }
@@ -284,14 +278,7 @@ namespace Lab_5
 
                     if (Enum.TryParse(familyInp, true, out Family searchFamily) && Enum.IsDefined(typeof(Family), searchFamily))
                     {
-                        for (int i = 0; i < list.Count; i++)
-                        {
-                            if (list[i].Family == searchFamily)
-                            {
-                                count++;
-                                PrintRow(i + 1, list[i]);
-                            }
-                        }
+                        searchResult = list.FindAll(x => x.Family == searchFamily);
                     }
                     else
                     {
@@ -305,14 +292,7 @@ namespace Lab_5
 
                     if (Enum.TryParse(brandInp, true, out Brand searchBrand) && Enum.IsDefined(typeof(Brand), searchBrand))
                     {
-                        for (int i = 0; i < list.Count; i++)
-                        {
-                            if (list[i].Brand == searchBrand)
-                            {
-                                count++;
-                                PrintRow(i + 1, list[i]);
-                            }
-                        }
+                        searchResult = list.FindAll(x => x.Brand == searchBrand);
                     }
                     else
                     {
@@ -322,24 +302,19 @@ namespace Lab_5
                 case 4:
                     int electric = Menu("Search for: 1 - Electric, 0 - Acoustic: ", 0, 1);
                     bool isElec = electric == 1;
-
-                    for (int i = 0; i < list.Count; i++)
-                    {
-                        if (list[i].IsElectric == isElec)
-                        {
-                            count++;
-                            PrintRow(i + 1, list[i]);
-                        }
-                    }
+                    searchResult = list.FindAll(x => x.IsElectric == isElec);
                     break;
-
-
                 case 0:
                     return;
             }
-            if (count == 0)
+            if (searchResult.Count == 0)
             {
                 Console.WriteLine("Such elements were not found. ");
+            }
+            else
+            {
+                Console.WriteLine($"\nFound {searchResult.Count} matching instruments:");
+                ShowAll(searchResult);
             }
         }
 
